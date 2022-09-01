@@ -1,25 +1,16 @@
-# name: template-jupyter-project
+name: methane-policy-iiasa
 channels:
-  - chrisroadmap
   - conda-forge
   - defaults
 dependencies:
-  - climateforcing
   - jupyter
   - nbstripout
-# you might also want:
-#   - fair
-#   - h5py
-#   - iris
-#   - matplotlib
-#   - numpy
-#   - openpyxl
-#   - pandas
-#   - scipy
-#   - seaborn
-#   - statsmodels
-#   - tqdm
+  - matplotlib
+  - numpy
+  - pandas
+  - scipy
+  - tqdm
 # if you need to pip install anything:
-#   - pip
-#   - pip:
-#     - thing-to-pip-install
+  - pip
+  - pip:
+    - -e ../fair2.1-calibrate

@@ -2,8 +2,9 @@
 .DS_Store
 Thumbs.db
 
-# Big input files that can be downloaded and don't need committing
-data_input/rcmip/
+# This file is not public: requires account registration
+# see https://data.ece.iiasa.ac.at/ar6/downloads
+data/ar6_emissions_vetted_infillerdatabase.csv
 
 # You may want to ignore some large data output files too if they are reproducible
 # data_output/<insert subdir here>

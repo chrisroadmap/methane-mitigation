@@ -7,7 +7,7 @@ Thumbs.db
 data/ar6_emissions_vetted_infillerdatabase.csv
 
 # You may want to ignore some large data output files too if they are reproducible
-# data_output/<insert subdir here>
+results/
 
 # Byte-compiled / optimized / DLL files
 __pycache__/

@@ -8,10 +8,10 @@ from parallel import single_fair_run
 from utils import _parallel_process
 
 # reduce N_SCEN and N_ENS for testing
-N_SCEN = 3  # 113 total: how many baseline scenarios. Times by 6 for number of runs
+N_SCEN = 113  # 113 total: how many baseline scenarios. Times by 6 for number of runs
 #N_CONF = 1001  # 1001 total: make a smaller number for testing
-N_WORKERS = 2 # parallel workers
-FRONT_SERIAL = 1    # non-zero if testing
+N_WORKERS = 19 # parallel workers
+FRONT_SERIAL = 0    # non-zero if testing
 FRONT_PARALLEL = 0  # non-zero if testing
 
 if __name__ == "__main__":

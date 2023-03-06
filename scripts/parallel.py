@@ -12,8 +12,7 @@ from fair.io import read_properties
 def single_fair_run(cfg):
     model = cfg["model"]
     scenario_base = cfg["scenario_base"]
-    scenario_variants = ['Baseline_CLE', 'MFR_tech', 'MFR_explore', 'MFR_struc',
-       'MFR_behavior', 'MFR_develop']
+    scenario_variants = ['Baseline_CLE', 'MFR_tech_MC20_100', 'MFR_tech_MCGT100', 'MFR_tech_MCLE20', 'MFR_explore', 'MFR_fair', 'MFR_fossil', 'MFR_behavior', 'MFR_develop']
     scenarios = []
     for variant in scenario_variants:
         scenarios.append(scenario_base + "|" + variant)
@@ -39,6 +38,10 @@ def single_fair_run(cfg):
     df_volcanic = pd.read_csv(
         "../data/volcanic_ERF_monthly_-950001-201912.csv"
     )
+    df_methane = pd.read_csv(
+        "../data/CH4_lifetime.csv",
+        index_col=0
+    )
 
     volcanic_forcing = np.zeros(352)
     for i, year in enumerate(np.arange(1750, 2021)):
@@ -55,7 +58,7 @@ def single_fair_run(cfg):
     da_emissions = xr.load_dataarray("../data/ssp126_emissions_1750-2100.nc")
     da = da_emissions.loc[dict(config="unspecified", scenario="ssp126")]
     fe = da.expand_dims(dim=["scenario", "config"], axis=(1, 2))
-    fe = fe.drop(["scenario", "config"]) * np.ones((1, 6, 1001, 1))
+    fe = fe.drop(["scenario", "config"]) * np.ones((1, 9, 1001, 1))
     f.emissions = fe.assign_coords({"scenario": scenarios, "config": configs})
 
     df_scenarios = pd.read_csv("../data/gains_scenarios_harmonized.csv")
@@ -132,12 +135,19 @@ def single_fair_run(cfg):
     fill(f.species_configs["iirf_uptake"], df_configs["rU"], specie="CO2")
     fill(f.species_configs["iirf_temperature"], df_configs["rT"], specie="CO2")
 
-    # methane lifetime baseline - should be imported from calibration
-    fill(f.species_configs["unperturbed_lifetime"], 10.11702748, specie="CH4")
+    # methane lifetime baseline and sensitivity
+    fill(f.species_configs["unperturbed_lifetime"], df_methane.loc["historical_best", "base"], specie="CH4")
+    fill(f.species_configs["ch4_lifetime_chemical_sensitivity"], df_methane.loc["historical_best", "CH4"], specie="CH4")
+    fill(f.species_configs["ch4_lifetime_chemical_sensitivity"], df_methane.loc["historical_best", "N2O"], specie="N2O")
+    fill(f.species_configs["ch4_lifetime_chemical_sensitivity"], df_methane.loc["historical_best", "VOC"], specie="VOC")
+    fill(f.species_configs["ch4_lifetime_chemical_sensitivity"], df_methane.loc["historical_best", "NOx"], specie="NOx")
+    fill(f.species_configs["ch4_lifetime_chemical_sensitivity"], df_methane.loc["historical_best", "HC"], specie="Equivalent effective stratospheric chlorine")
+    fill(f.species_configs["lifetime_temperature_sensitivity"], df_methane.loc["historical_best", "temp"])
 
-    # emissions adjustments for N2O and CH4
+    # emissions adjustments for N2O, CH4 and NOx
     fill(f.species_configs["baseline_emissions"], 19.019783117809567, specie="CH4")
     fill(f.species_configs["baseline_emissions"], 0.08602230754, specie="N2O")
+    fill(f.species_configs["baseline_emissions"], 19.423526730206152, specie="NOx")
 
     # aerosol indirect
     fill(f.species_configs["aci_scale"], df_configs["beta"])

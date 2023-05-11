@@ -5,8 +5,8 @@ Thumbs.db
 # Big input files that can be downloaded and don't need committing
 data_input/rcmip/
 
-# Large output
-results/*.nc
+# All output
+results/
 
 # You may want to ignore some large data output files too if they are reproducible
 # data_output/<insert subdir here>

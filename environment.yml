@@ -3,7 +3,7 @@ channels:
   - chrisroadmap
   - conda-forge
 dependencies:
-  - fair==2.1.0
+  - fair==2.1.1
   - jupyter
   - nbstripout
   - matplotlib

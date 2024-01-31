@@ -28,6 +28,6 @@ $ jupyter notebook
 ```
 
 2. In `notebook`, navigate to `notebooks` directory. Run the notebooks in this order:
-  1. `adaptive-removal-1.4.0.ipynb`: this does the data crunching. It will likely take between 6 and 24 hours, depending on your machine.
-  2. `zec-1.4.0.ipynb`: calculate ZEC and carbon cycle metrics
-  3. `analyse-1.4.0.ipynb`: produce the results and plots reported in the paper
+  - `adaptive-removal-1.4.0.ipynb`: this does the data crunching. It will likely take between 6 and 24 hours, depending on your machine.
+  - `zec-1.4.0.ipynb`: calculate ZEC and carbon cycle metrics
+  - `analyse-1.4.0.ipynb`: produce the results and plots reported in the paper

@@ -1,16 +1,15 @@
-name: methane-policy-iiasa
+name: methane-mitigation
 channels:
+  - chrisroadmap
   - conda-forge
-  - defaults
 dependencies:
+  - fair==2.1.3
   - jupyter
   - nbstripout
   - matplotlib
   - numpy
   - pandas
   - scipy
+  - scikit-learn
+  - statsmodels
   - tqdm
-# if you need to pip install anything:
-  - pip
-  - pip:
-    - -e ../fair2.1-calibrate

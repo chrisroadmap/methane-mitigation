@@ -1,42 +1,33 @@
-# template-jupyter-project
-Template to use for new python-based Jupyter notebook projects
+# How much methane removal is required to avoid overshooting 1.5°C?
 
-## First steps
+This repository reproduces the results from Smith & Mathison, submitted.
 
-This assumes that you are developing with `conda` and `python` 3.7, 3.8 or 3.9. These instructions should work for Windows when using Anaconda Prompt and for MacOS in Terminal (and by extension, likely will work on Linux).
+## Reproduction steps
 
-1. Edit the `environment.yml` file:
-  - Uncomment the `name` attribute.
-  - After `name`, enter the name you want for your environment. Good practice is to use the same name for the environment as for the repo.
-  - Edit the dependencies list as required.
-2. Create your environment:
+### Set up conda repository
 
-```
-conda env create -f environment.yml
-```
-3. If you want to make nice version-control friendly notebooks, which will remove all output and data upon committing, run
-```
-nbstripout --install
-```
+This assumes that you are using `anaconda` and `python`. Currently, `fair` and `fair-calibrate` appear to be most stable with `python` versions 3.8, 3.9, 3.10 and 3.11. Others may work, but these ones are tested.
 
-4. Examine .gitignore and decide where you want to put any large input or output datasets that you don't want to commit to GitHub, and fill in these paths.
-
-## Operation 
-
-### Developing your package
-
-Most of the time your workflow will look like this
+1. Create your environment:
 
 ```
-conda activate your-env-name
-jupyter notebook
+$ conda env create -f environment.yml
+```
+2. If you want to make nice version-control friendly notebooks, which will remove all output and data upon committing, run
+
+```
+$ nbstripout --install
 ```
 
-### Updating requirements
+### Run and reproduce results
 
-As you build the package you will likely want to add more dependencies. Edit the `environment.yml` file and run
+1. Fire up jupyter notebook
+
 ```
-conda env update -f environment.yml --prune
+$ jupyter notebook
 ```
 
-Please do not overwrite the `environment.yml` file using `conda env export`, as this exports everything in your local environment including all sub-dependencies and OS-specific packages (and sometimes local paths).
+2. In `notebook`, navigate to `notebooks` directory. Run the notebooks in this order:
+  1. `adaptive-removal-1.4.0.ipynb`: this does the data crunching. It will likely take between 6 and 24 hours, depending on your machine.
+  2. `zec-1.4.0.ipynb`: calculate ZEC and carbon cycle metrics
+  3. `analyse-1.4.0.ipynb`: produce the results and plots reported in the paper

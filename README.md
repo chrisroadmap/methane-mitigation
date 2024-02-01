@@ -1,5 +1,7 @@
 # How much methane removal is required to avoid overshooting 1.5°C?
 
+[![DOI](https://zenodo.org/badge/DOI/10.5281/zenodo.10601250.svg)](https://doi.org/10.5281/zenodo.10601250)
+
 This repository reproduces the results from Smith & Mathison, submitted.
 
 ## Reproduction steps
